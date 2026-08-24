@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Medisave Pharmacy — call, WhatsApp, email, or send us a message. Located at Batu 4½ Jalan Ipoh, Kuala Lumpur.">
+  <title>Contact | Medisave Pharmacy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <div class="page-hero">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>We're here to help. Reach us out anytime.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container location-grid">
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div>
+            <strong>Phone</strong>
+            <p><a href="tel:+601161443401">+60 11-6144 3401</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">💬</div>
+          <div>
+            <strong>WhatsApp</strong>
+            <p><a href="https://wa.me/601161443401" target="_blank" rel="noopener">Message us on WhatsApp</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div>
+            <strong>Email</strong>
+            <p><a href="mailto:medipharma1@gmail.com">medipharma1@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <strong>Address</strong>
+            <p>
+              740, Jalan Sultan Azlan Shah<br>
+              Batu 4 1/2 Jalan Ipoh<br>
+              51200 Kuala Lumpur, Malaysia
+            </p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📘</div>
+          <div>
+            <strong>Facebook</strong>
+            <p><a href="https://www.facebook.com/p/Medisave-Pharmacy-61572111764826/" target="_blank" rel="noopener">Medisave Pharmacy on Facebook</a></p>
+          </div>
+        </div>
+        <div class="btn-group">
+          <a href="tel:+601161443401" class="btn btn-primary">Call Now</a>
+          <a href="https://wa.me/601161443401" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3 style="margin-bottom: 1.25rem;">Send Us a Message</h3>
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="sr-only">
+            <label>Don't fill this out: <input name="bot-field"></label>
+          </p>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" required placeholder="+60 12-345 6789">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="How can we help you?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+          <p class="form-note">Messages are sent to our team at medipharma1@gmail.com. We typically respond during opening hours (Mon–Fri, 9AM–6PM).</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/js/include.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

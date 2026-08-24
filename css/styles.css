@@ -132,8 +132,20 @@ ul {
   box-shadow: var(--shadow);
 }
 
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .main-nav.open {
   display: block;
+  animation: slideDown 0.3s ease-out;
 }
 
 .main-nav ul {
@@ -801,4 +813,25 @@ section.cta-band {
 
 .dot.active {
   background: var(--red);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0; /* Start invisible until animation plays */
+}
+
+/* Stagger effect with animation delays */
+.fade-in-up {
+  animation-fill-mode: both;
 }

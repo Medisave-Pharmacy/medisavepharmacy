@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop OTC medicines, supplements and wellness products online at Medisave Pharmacy, Batu 4½ Jalan Ipoh, Kuala Lumpur. Order via WhatsApp for fast confirmation.">
+  <title>Store | Medisave Pharmacy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <div class="page-hero fade-in-up">
+    <div class="container">
+      <h1>Store</h1>
+      <p>Browse OTC medicines, supplements &amp; wellness products. Add items to your cart and confirm your order with our pharmacist over WhatsApp.</p>
+    </div>
+  </div>
+
+  <section id="store">
+    <div class="container fade-in-up">
+
+      <div class="product-search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke-linecap="round"/>
+          <path d="M20 20l-3.5-3.5" stroke-linecap="round"/>
+        </svg>
+        <input type="text" id="product-search" placeholder="Search products, e.g. Panadol, Vitamin C, Minyak Angin..." aria-label="Search products">
+      </div>
+
+      <p id="product-loading" style="text-align:center; color: var(--grey);">Loading products…</p>
+      <p id="product-error" style="display:none; text-align:center; color: var(--grey);">Couldn't load products right now. Please refresh, or contact us on WhatsApp.</p>
+
+      <div id="product-list"></div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="container fade-in-up">
+      <div class="card rx-card">
+        <h3>Need a Prescription Medicine?</h3>
+        <p class="mt-1" style="color: var(--grey);">Prescription items can't be added to cart online — our pharmacist needs to verify your prescription first. Send us a photo of your prescription on WhatsApp and we'll confirm availability and pricing.</p>
+        <a href="https://wa.me/601161443401?text=Hi%20Medisave%20Pharmacy%2C%20I%20have%20a%20prescription%20I%27d%20like%20to%20order." class="btn btn-whatsapp mt-1" target="_blank" rel="noopener">Enquire via WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/include.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    (function () {
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str == null ? '' : String(str);
+        return div.innerHTML;
+      }
+
+      function buildProductCard(p) {
+        const card = document.createElement('div');
+        card.className = 'card product-card';
+        card.innerHTML =
+          '<span class="product-category">' + escapeHtml(p.category) + '</span>' +
+          '<img class="product-image" src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.name) + '">' +
+          '<h3>' + escapeHtml(p.name) + '</h3>' +
+          '<p class="product-price">RM' + Number(p.price).toFixed(2) + '</p>' +
+          '<button class="btn btn-primary" data-add-to-cart' +
+          ' data-id="' + escapeHtml(p.id) + '"' +
+          ' data-name="' + escapeHtml(p.name) + '"' +
+          ' data-price="' + Number(p.price) + '"' +
+          ' data-img="' + escapeHtml(p.image) + '">Add to Cart</button>';
+        return card;
+      }
+
+      function renderProducts(products) {
+        const list = document.getElementById('product-list');
+        list.innerHTML = '';
+
+        const grid = document.createElement('div');
+        grid.className = 'card-grid cols-3';
+        products.forEach(function (p) {
+          grid.appendChild(buildProductCard(p));
+        });
+        list.appendChild(grid);
+
+        if (window.MedisaveCart && window.MedisaveCart.initProductSearch) {
+          window.MedisaveCart.initProductSearch();
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        fetch('get-products.php')
+          .then(function (res) {
+            if (!res.ok) throw new Error('Request failed');
+            return res.json();
+          })
+          .then(function (products) {
+            document.getElementById('product-loading').style.display = 'none';
+            if (!Array.isArray(products) || products.length === 0) {
+              document.getElementById('product-error').textContent = 'No products found.';
+              document.getElementById('product-error').style.display = 'block';
+              return;
+            }
+            renderProducts(products);
+          })
+          .catch(function () {
+            document.getElementById('product-loading').style.display = 'none';
+            document.getElementById('product-error').style.display = 'block';
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

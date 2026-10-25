@@ -1,6 +1,6 @@
 (function () {
   const CART_KEY = 'medisave_cart';
-  const WHATSAPP_NUMBER = '601161443401'; // same number used in index.html
+  const WHATSAPP_NUMBER = '601161443401';
 
   // ---------- storage ----------
   function getCart() {
@@ -125,13 +125,17 @@
     const cart = getCart();
     if (cart.length === 0) return;
 
-    let msg = 'Hi Medisave Pharmacy, I would like to order:%0A%0A';
-    cart.forEach((item) => {
-      msg += '- ' + item.name + ' x' + item.qty + '%0A';
+    const lines = ['Hi Medisave Pharmacy, I would like to order:', ''];
+    cart.forEach(function (item) {
+      lines.push('- ' + item.name + ' x' + item.qty);
     });
-    msg += '%0AEstimated Total: ' + formatPrice(cartTotal(cart)) + '%0A%0APlease confirm availability and final price. Thank you!';
+    lines.push('');
+    lines.push('Estimated Total: ' + formatPrice(cartTotal(cart)));
+    lines.push('');
+    lines.push('Please confirm availability and final price. Thank you!');
 
-    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + msg, '_blank', 'noopener');
+    const message = encodeURIComponent(lines.join('\n'));
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + message, '_blank', 'noopener');
   }
 
   // ---------- inject sidebar markup once, on any page ----------
@@ -249,5 +253,5 @@
     }
   });
 
-  window.MedisaveCart = { addToCart, removeFromCart, updateQty, openCart, closeCart };
+  window.MedisaveCart = { addToCart, removeFromCart, updateQty, openCart, closeCart, initProductSearch, renderCart };
 })();

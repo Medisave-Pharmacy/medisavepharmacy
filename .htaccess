@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# If someone visits /about.html directly, redirect them to /about (clean URL)
+RewriteCond %{THE_REQUEST} \s/+(.+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# When /about is requested, quietly serve about.html behind the scenes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
